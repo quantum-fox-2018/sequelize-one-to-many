@@ -4,8 +4,14 @@ const models  = require('../models');
 
 app.get('/', (req, res) => {
   models.Teacher
-  .findAll()
+  .findAll({
+    order: [
+      ['id', 'ASC']
+    ],
+    include: [models.Subject]
+  })
   .then(teachers => {
+    console.log(teachers.Subject);
     res.render('teachers', { teachers: teachers })
   })
   .catch(error => {
@@ -14,7 +20,18 @@ app.get('/', (req, res) => {
 })
 
 app.get('/add', (req, res) => {
-  res.render('teacher_add');
+  models.Subject
+  .findAll({
+    order: [
+      ['id', 'ASC']
+    ],
+  })
+  .then(subjects => {
+    res.render('teacher_add', { subjects: subjects })
+  })
+  .catch(error => {
+    console.log(error.message);
+  })
 })
 
 app.post('/add', (req, res) => {
@@ -22,7 +39,8 @@ app.post('/add', (req, res) => {
   .build({
     first_name  : req.body.first_name,
     last_name   : req.body.last_name,
-    email       : req.body.email
+    email       : req.body.email,
+    SubjectId   : req.body.SubjectId
   })
   .save()
   .then(success => {
@@ -37,9 +55,18 @@ app.get('/edit/:id', (req, res) => {
   let id = req.params.id;
 
   models.Teacher
-  .findById(id)
+  .findById(id, {
+    include: [models.Subject]
+  })
   .then(teacher => {
-    res.render('teacher_edit', { teacher })
+    models.Subject
+    .findAll()
+    .then(subjects => {
+      res.render('teacher_edit', { teacher: teacher, subjects: subjects })
+    })
+    .catch(error => {
+      console.log(error.message);
+    })
   })
   .catch(error => {
     console.log(error.message);
@@ -51,7 +78,8 @@ app.post('/edit/:id', (req, res) => {
     id          : req.params.id,
     first_name  : req.body.first_name,
     last_name   : req.body.last_name,
-    email       : req.body.email
+    email       : req.body.email,
+    SubjectId   : req.body.SubjectId
   }
   console.log(newData);
 

@@ -13,6 +13,16 @@
       <input type="text" name="last_name" value="<%= teacher.last_name %>"><br>
       Email:<br>
       <input type="text" name="email" value="<%= teacher.email %>"><br>
+      Subject:<br>
+      <select class="" name="SubjectId">
+        <% subjects.forEach(subject => { %>
+          <% if (teacher.SubjectId == subject.id) { %>
+            <option value="<%= subject.id %>" selected><%= subject.subject_name %></option>
+          <% } else { %>
+            <option value="<%= subject.id %>"><%= subject.subject_name %></option>
+          <% } %>
+        <% }) %>
+      </select>
       <br>
       <button type="submit">Update</button>
     </form>
