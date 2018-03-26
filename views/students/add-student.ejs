@@ -1,0 +1,12 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/menu.ejs') %>
+
+<div class="container">
+    <h1>Form Student</h1>
+    <form action="/students/add" method="post">
+        <input type="text" name="fname" placeholder="firstname.."> <br><br>
+        <input type="text" name="lname" placeholder="lastname.."> <br><br>
+        <input type="text" name="email" placeholder="email.."> <br><br>
+        <input type="submit" value="Save">
+    </form>
+</div>

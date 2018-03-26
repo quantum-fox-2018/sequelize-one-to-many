@@ -1,0 +1,17 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/menu.ejs') %>
+
+<h1>Form Teacher</h1>
+<%= notif %>
+<form action="/teachers/add" method="post">
+    <input type="text" name="fname" placeholder="firstname.."> <br><br>
+    <input type="text" name="lname" placeholder="lastname.."> <br><br>
+    <input type="text" name="email" placeholder="email.."> <br><br>
+    <select name="subject">
+        <option>--Choose Subject--</option>
+        <% for(let i=0; i<subjectOpt.length; i++) { %>
+        <option value="<%= subjectOpt[i].id %>"><%= subjectOpt[i].subject_name %></option>
+        <% } %>
+    </select> <br><br>
+    <input type="submit" value="Save">
+</form>

@@ -1,0 +1,23 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/menu.ejs') %>
+
+<div class="container">
+    <%= notif %>
+    <h1>Form Edit Teacher</h1>
+    <form action="/teachers/update/<%= data.id %>" method="post">
+        <input type="text" name="fname" value="<%= data.first_name %>" placeholder="firstname.."> <br><br>
+        <input type="text" name="lname" value="<%= data.last_name %>" placeholder="lastname.."> <br><br>
+        <input type="text" name="email" value="<%= data.email %>" placeholder="email.."> <br><br>
+        <select name="subject">
+            <option>--Choose Subject--</option>
+            <% for(let i=0; i<subjectOpt.length; i++) { %>
+                <% if(data.SubjectId == subjectOpt[i].id) { %>
+                    <option value="<%= subjectOpt[i].id %>" selected><%= subjectOpt[i].subject_name %></option>
+                <% } else { %>
+                    <option value="<%= subjectOpt[i].id %>"><%= subjectOpt[i].subject_name %></option>
+                <% } %>
+            <% } %>
+        </select> <br><br>
+        <input type="submit" value="Save">
+    </form>
+</div>

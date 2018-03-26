@@ -1,0 +1,39 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/menu.ejs') %>
+<div class="container">
+    <a href="/teachers/add">Add Teacher</a>
+    <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% no =1 %>
+                <% for(let i=0; i<data.length; i++){ %>
+                    <tr>
+                        <td><%= no %></td>
+                        <td><%= data[i].first_name %></td>
+                        <td><%= data[i].last_name %></td>
+                        <td><%= data[i].email %></td>
+                        <% if(data[i].subject == null) { %>
+                            <td> unassigned </td>
+                        <% } else { %>
+                            <td><%= data[i].subject.subject_name %></td>
+                        <% } %>
+                        <td>
+                            <a href="/teachers/edit/<%= data[i].id %>">EDIT</a>
+                            <a href="/teachers/delete/<%= data[i].id %>">DELETE</a>
+                        </td>
+                    </tr>
+                    <% no++ %>
+                <% } %>
+            </tbody>
+        </table>
+    
+</div>
