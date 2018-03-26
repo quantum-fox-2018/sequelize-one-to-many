@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>
+      Edit Students
+    </title>
+    <style>
+      input[type=text]{
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Edit Students Data</h2>
+    <h4>
+      <a href="/students">show all data</a>
+    </h4>
+    <form action="/students/editResult/<%= studentData.id %>" method="POST">
+      <label for="first_name">First Name :</label><br>
+      <input type="text" name="first_name" value="<%= studentData.first_name %>" /><br><br>
+      <label for="last_name">Last Name :</label><br>
+      <input type="text" name="last_name" value="<%= studentData.last_name %>" /><br><br>
+      <label for="email">Email :</label><br>
+      <input type="text" name="email" value="<%= studentData.email %>" /><br><br>
+      <input type="submit" value="Edit Student" />
+    </form>
+  </body>
+
+</html>

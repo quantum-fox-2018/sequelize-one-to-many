@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <h2>All Subjects Data</h2>
+    <a href="/teachers/add">Add Subject Data</a>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Subject Id</th>
+          <th>Teachers</th>
+          <th>Subject</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%for(let i = 0; i < Subject.length; i++) { %>
+          <tr>
+            <td><%= Subject[i].id %></td>
+            <td><%= Subject[i].Teachers.map(ob => `${ob.first_name} ${ob.last_name}`) %></td>
+            <td><%= Subject[i].subject_name %></td>
+            <td>
+              <a href="">Edit</a>
+              |
+              <a href="#" onclick=" ">Delete</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </body>
+</html>

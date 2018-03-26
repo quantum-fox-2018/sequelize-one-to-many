@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>
+      Data Teachers
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+    <h2>Teachers Data</h2>
+    <a href="/teachers/add">add Teacher</a>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Firt Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Subject</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(let i = 0; i < Teachers.length; i++){ %>
+          <tr>
+            <td><%= Teachers[i].id %></td>
+            <td><%= Teachers[i].first_name %></td>
+            <td><%= Teachers[i].last_name %></td>
+            <td><%= Teachers[i].email %></td>
+            <% let subject = 'unassigned'%>
+            <% if(Teachers[i].Subject !== null ){ subject = Teachers[i].Subject.subject_name }%>
+            <td><%= subject %></td>
+
+            <td>
+              <a href="/teachers/edit/<%= Teachers[i].id %>">Edit</a>
+              |
+              <a href="#" onclick="return confirmDel(<%= Teachers[i].id %>)">Delete</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <script>
+      let confirmDel = function(id){
+        let confirmBox = confirm(`Apakah kamu yakin akan menghapus Data ${id}`)
+        if(confirmBox == true){
+            window.location.href = `/teachers/delete/${id}`;
+            // alert(`Data ${id} Berhasil di hapus`);
+        }
+      }
+    </script>
+  </body>
+</html>
