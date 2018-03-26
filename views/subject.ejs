@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Subjects Data</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body class = "body">
+    <h1 style="text-align: center">Subjects Data</h1>
+    <a href="/subject/add-subject" ><h3 style="text-align: center">add subjects</h3></a>
+    <table style="width:50%" class = "table" align="center">
+        <tr>
+            <th>id</th>
+            <th>Subject Name</th>
+            <th>Option</th>
+        </tr>
+            <% for(let i =0; i< subject_data.length; i++){ %>
+                <tr>
+                    <td><%= subject_data[i].id%></td>
+                    <td><%= subject_data[i].subject_name%></td>
+                    <td><a href="/subject/edit-subject?id=<%=subject_data[i].id%>">edit</a> | <a href="/subject/delete-subject?id=<%=subject_data[i].id%>">delete</a></td>
+                </tr>
+            <%}%>
+          </table>
+</body>
+</html>

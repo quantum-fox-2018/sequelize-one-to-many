@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Teachers Data</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <h1 style="text-align: center">All Teachers Data</h1>
+    <a href="/teacher/add-teacher" ><h3 style="text-align: center">add teacher</h3></a>
+    <table style="width:100%" class = "table">
+        <tr>
+            <th>id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Options</th>
+        </tr>
+            <% for(let i =0; i< teacher_data.length; i++){ %>
+                <tr>
+                    <td style="text-align: left"><%= teacher_data[i].id%></td>
+                    <td style="text-align: left"><%= teacher_data[i].first_name%></td>
+                    <td style="text-align: left"><%= teacher_data[i].last_name%></td>
+                    <td style="text-align: left"><%= teacher_data[i].email%></td>
+                    <td style="text-align: left">
+                        <% if( teacher_data[i].SubjectId === null ){ %>
+                              unassigned
+                        <% }else { %>
+                            <%=  teacher_data[i].Subject.subject_name %>
+                          <% } %>
+                    </td>
+                    <td><a href="/teacher/edit-teacher?id=<%=teacher_data[i].id%>">edit</a> | <a href="/teacher/delete-teacher?id=<%=teacher_data[i].id%>">delete</a></td>
+                </tr>
+            <% } %>
+          </table>
+</body>
+</html>
