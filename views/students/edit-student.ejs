@@ -1,0 +1,10 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/menu.ejs') %>
+
+<h1>Form Edit Student</h1>
+<form action="/students/edit/<%= data.id %>" method="post">
+    <input type="text" name="fname" value="<%= data.first_name %>" placeholder="firstname.."> <br><br>
+    <input type="text" name="lname" value="<%= data.last_name %>" placeholder="lastname.."> <br><br>
+    <input type="text" name="email" value="<%= data.email %>" placeholder="email.."> <br><br>
+    <input type="submit" value="Save">
+</form>

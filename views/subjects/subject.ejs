@@ -1,0 +1,41 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/menu.ejs') %>
+<div class="container">
+    <a href="/subjects/add">Add Subject</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Subject Name</th>
+                <th>Teacher</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% no =1 %>
+            <% for(let i=0; i<data.length; i++){ %>
+                <tr>
+                    <td><%= no %></td>
+                    <td><%= data[i].subject_name %></td>
+                    <td>
+                        <ul>
+                        <% if(data[i].teacher.length != 0){ %>
+                            <% for(let j=0; j<data[i].teacher.length; j++) { %>
+                                <% let dataTeacher = data[i].teacher; %>
+                                <li><%= `${dataTeacher[j].first_name} ${dataTeacher[j].last_name}`%></li>
+                            <% } %>
+                        <% } else { %>
+                            <li>-</li>
+                        <% } %>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="/subjects/edit/<%= data[i].id %>">EDIT</a>
+                        <a href="/subjects/delete/<%= data[i].id %>">DELETE</a>
+                    </td>
+                </tr>
+                <% no++ %>
+            <% } %>
+        </tbody>
+    </table>
+</div>
