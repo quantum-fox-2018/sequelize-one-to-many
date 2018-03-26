@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const model = require('./models');
+const prefix = require('./helper_add_prefix_teacher.js');
 
 let app = express();
 app.set('view engine', 'ejs');
@@ -13,16 +14,12 @@ app.use(bodyParser.urlencoded({extended:false}));
 //TEACHERS
 //================
 app.get('/teachers', function(req,res){
+    res.locals.addPrefix = prefix
     model.Teacher.findAll({
-        include: [{
-            model: model.Subject
-        }]
+        include: {model: model.Subject}
     })
     .then(function(teacherData){
         res.render('teachers', {teacherData: teacherData});
-    })
-    .catch(function(err){
-        console.log(err);
     })
 })
 

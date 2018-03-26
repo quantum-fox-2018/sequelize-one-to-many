@@ -8,31 +8,23 @@
     <div style="text-align:center">
         <a href="/teachers/add">add teacher</a>
     </div>
-    <table style="width:100%">
+   <%- include('../partial/tableHeader.ejs')%>
+    <% for(let index=0; index<teacherData.length; index++){ %>
         <tr>
-            <th>id</th>
-            <th>First Name</th>
-            <th>Last Name</th> 
-            <th>Email</th>
-            <th>Subject</th>
-            <th>Options</th>
+            <th><%= teacherData[index].id%></th>
+            <th><%= addPrefix(teacherData[index].first_name)%></th>
+            <th><%= teacherData[index].last_name%></th> 
+            <th><%= teacherData[index].email%></th>
+            <th>
+                <% if(teacherData[index].SubjectId == undefined){%>
+                    unassigned
+                <%}else{%>
+                    <%= teacherData[index].Subject.subject_name%>
+                <%}%>
+            </th>
+            <th><a href="/teachers/edit/<%=teacherData[index].id%>">edit</a> | <a href="/teachers/deleteTeacher?id=<%=teacherData[index].id%>">delete</a></th>
         </tr>
-        <% for(let index=0; index<teacherData.length; index++){ %>
-            <tr>
-                <th><%= teacherData[index].id%></th>
-                <th><%= teacherData[index].first_name%></th>
-                <th><%= teacherData[index].last_name%></th> 
-                <th><%= teacherData[index].email%></th>
-                <th>
-                    <% if(teacherData[index].SubjectId == undefined){%>
-                        unassigned
-                    <%}else{%>
-                        <%= teacherData[index].Subject.subject_name%>
-                    <%}%>
-                </th>
-                <th><a href="/teachers/edit/<%=teacherData[index].id%>">edit</a> | <a href="/teachers/deleteTeacher?id=<%=teacherData[index].id%>">delete</a></th>
-            </tr>
-        <%}%>
-    </table>
+    <%}%>
+   </table>
 </body>
 </html>

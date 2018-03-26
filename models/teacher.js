@@ -10,10 +10,24 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: {
           args: true,
           msg: 'email format is incorrect'
-        }
+        },
+
       }
     }
-  }, {});
+  }, {
+    indexes: [{
+      unique: true,
+      fields: ['email']
+    }],
+    hooks: {
+      beforeValidate: function(Teacher, options){
+        console.log('VALIDATION START!');
+      },
+      afterValidate: function(Teacher, options){
+        console.log('VALIDATION ENDED');
+      }
+    }
+  });
   Teacher.associate = function(models) {
     // associations can be defined here
     Teacher.belongsTo(models.Subject)
