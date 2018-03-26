@@ -18,7 +18,7 @@
       <a href='/teachers/add'>Add Teacher</a>
       <br>
       <br>
-      <table style="width:100%">
+      <table class="table">
         <tr>
         <% heads.forEach(head => {%>
           <th>
@@ -44,8 +44,11 @@
               <%= teacher.email %>
             </td>
             <td>
+              <%= helpers.subjectTeacher(teacher.Subject) %>
+            </td>
+            <td>
               <a href='/teachers/edit/<%= teacher.id %>'>edit</a> |
-              <a href='/teachers/delete/<%= teacher.id %>' onclick="return confirm('delete this teacher?')">delete</a>
+              <a href='/teachers/delete/<%= teacher.id %>' onclick="return confirm('delete this teacher: <%= teacher.first_name %>?')">delete</a>
             </td>
           </tr>
           <%})%>

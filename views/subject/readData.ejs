@@ -18,7 +18,7 @@
       <a href='/subjects/add'>Add Subject</a>
       <br>
       <br>
-      <table style="width:100%">
+      <table class="table">
         <tr>
         <% heads.forEach(head => {%>
           <th>
@@ -38,8 +38,11 @@
               <%= subject.subject_name %>
             </td>
             <td>
+              <%= helpers.teacherSubject(subject.Teachers) %>
+            </td>
+            <td>
               <a href='/subjects/edit/<%= subject.id %>'>edit</a> |
-              <a href='/subjects/delete/<%= subject.id %>' onclick="return confirm('delete this teacher?')">delete</a>
+              <a href='/subjects/delete/<%= subject.id %>' onclick="return confirm('delete this subject: <%= subject.subject_name%>?')">delete</a>
             </td>
           </tr>
           <%})%>

@@ -1,69 +1,14 @@
 const routes = require('express').Router()
-const models = require('../models')
+const Subject = require('../controller/Subject')
 
-routes.get('/', (req, res) => {
-  models.Subject.findAll()
-  .then(subjects => {
-    let obj = {
-      heads: ['No', 'Subject Name'],
-      subjects: subjects
-    }
-    res.render('./subject/readData', obj)
-  })
-  .catch(err => {res.send(err)})
-})
+routes.get('/', Subject.readData)
 
-routes.get('/add', (req, res) => {
-  res.render('./subject/createForm')
-})
+routes.get('/add', Subject.showAddData)
+routes.post('/add', Subject.createData)
 
-routes.post('/add', (req, res) => {
-  let data = {
-    subject_name: req.body.subject_name
-  }
-  models.Subject.create(data)
-  .then(() => {
-    res.redirect('/subjects')
-  })
-  .catch(err => {res.send(err)})
-})
+routes.get('/edit/:id', Subject.showUpdateData)
+routes.post('/edit/:id', Subject.updateData)
 
-routes.get('/edit/:id', (req, res) => {
-  let id = req.params.id
-  models.Subject.findById(id)
-  .then(subject => {
-    let obj = {subject}
-    res.render('./subject/updateForm', obj)
-  })
-  .catch(err => {res.send(err)})
-})
-
-routes.post('/edit/:id', (req, res) => {
-  let idObj = req.params.id
-  let obj = req.body
-  models.Subject.update(
-    obj,
-    {where: {
-      id: idObj
-    }}
-  )
-  .then(() => {
-    res.redirect('/subjects')
-  })
-  .catch(err => {res.send(err)})
-})
-
-routes.get('/delete/:id', (req, res) => {
-  let idObj = req.params.id
-  models.Subject.destroy({
-    where: {
-      id: idObj
-    }
-  })
-  .then(() => {
-    res.redirect('/subjects')
-  })
-  .catch(err => {res.send(err)})
-})
+routes.get('/delete/:id', Subject.deleteData)
 
 module.exports = routes

@@ -18,21 +18,21 @@
       <a href='/students/add'>Add Student</a>
       <br>
       <br>
-      <table style="width:100%">
+      <table class="table">
         <tr>
         <% heads.forEach(head => {%>
           <th>
             <%= head %>
           </th>
-          <%})%>
+        <%})%>
           <th>
             Option
           </th>
         </tr>
-        <% students.forEach(student => {%>
+        <% students.forEach((student, i) => {%>
           <tr>
             <td>
-              <%= student.id %>
+              <%= i+1 %>
             </td>
             <td>
               <%= student.first_name %>
@@ -45,7 +45,7 @@
             </td>
             <td>
               <a href='/students/edit/<%= student.id %>'>edit</a> |
-              <a href='/students/delete/<%= student.id %>' onclick="return confirm('delete this student?')">delete</a>
+              <a href='/students/delete/<%= student.id %>' onclick="return confirm('delete this student: <%= student.first_name %>?')">delete</a>
             </td>
           </tr>
           <%})%>
