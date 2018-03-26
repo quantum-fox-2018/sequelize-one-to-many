@@ -1,0 +1,25 @@
+<%- include ../partials/header.ejs%>
+  <h3>Data Subject</h3></br>
+  <a href="subjects/add">Add Subject</a></br></br>
+  <table>
+    <thead>
+      <th>No</th>
+      <th>ID</th>
+      <th>Subject Name</th>
+      <th>Options</th>
+    </thead>
+    <tbody>
+      <% for(let i=0; i<subjects.length; i++){ %>
+        <tr>
+          <td><%= i+1 %></td>
+          <td><%= subjects[i].id %></td>
+          <td><%= subjects[i].name %></td>
+          <td>
+            <a href="/subjects/<%= subjects[i].id %>/edit">Edit</a>
+            <a href="/subjects/<%= subjects[i].id %>/delete">Delete</a>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<%- include ../partials/footer.ejs%>
