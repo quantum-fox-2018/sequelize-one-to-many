@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../header %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h2>Data teacher</h2>
+        <table border='1'>
+            <tr>
+              <td><b>No.</b></td>
+              <td><b>First Name</b></td>
+              <td><b>Last Name</b></td>
+              <td><b>Email</b></td>
+              <td><center><b>Subject</b></center></td>
+              <td colspan=2><center><b>Action</b></center></td>
+            </tr>
+                <% teacher.forEach(dataTch => { %>
+            <tr>
+              <td><%= dataTch.id %></td>
+              <td><%= dataTch.firstName %></td>
+              <td><%= dataTch.lastName %></td>
+              <td><%= dataTch.email %></td>
+              <%if (dataTch.Subject) { %>
+              <td><%= dataTch.Subject.subjectName %></td>
+              <% } else { %>
+                <td>Unassigned</td>
+              <% } %>
+              <td><a href="/teacher/update/<%= dataTch.id %>">Edit</a></td>
+              <td><a href="/teacher/delete/<%= dataTch.id %>" onclick="return confirm('delete this teacher ?');">Delete</a></td>
+            </tr>
+          <% }) %>
+    </table>
+    </div>
+    <a href="/teacher/add">Add Teacher</a>
+    <a href="/">Back</a>
+</main>
+
+<footer>
+    <% include ../footer %>
+</footer>
+
+</body>
+</html>

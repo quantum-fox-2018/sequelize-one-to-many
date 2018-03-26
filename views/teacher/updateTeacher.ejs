@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../header %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h3>Update Teacher</h3>
+        <form name="formUpdate" method="POST" action="/teacher/update/<%= data_teacher.id %>">
+        <table>
+            <tr>
+            <td>First Name</td>
+            <td><input type="text" name="firstName" value="<%= data_teacher.firstName %>"></td>
+            </tr>
+            <tr>
+            <td>Last Name</td>
+            <td><input type="text" name="lastName" value="<%= data_teacher.lastName %>"></td>
+            </tr>
+            <tr>
+            <td>Email</td>
+            <td><input type="text" name="email" value="<%= data_teacher.email %>"></td>
+            <tr>
+            <td>Subject</td>
+            <td><select name="SubjectId">
+
+            <%data_subject.forEach((data) =>
+            {
+                %>
+                <option value="<%=data.id%>" <%if (data.id === data_teacher.id_subject) {%> selected   <%}%> > <%=data.subjectName%> </option>
+            <%})%>
+        </select></td>
+            </tr>
+            <!-- <tr> -->
+                <td colspan="2"><input type="submit" value="Save" ></td>
+            <!-- </tr> -->
+            <!-- <tr> -->
+                <td colspan="2"> <a href="/teacher">Back</a> </td>
+            <!-- </tr> -->
+            
+        </table>
+        </form>
+       
+    </div>
+</main>
+
+<footer>
+    <% include ../footer %>
+</footer>
+
+</body>
+</html>
