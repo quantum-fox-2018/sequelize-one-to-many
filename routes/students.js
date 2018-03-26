@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     ]
   })
   .then(students => {
-    res.render('students', { students })
+    res.render('student/students', { students })
   })
   .catch(error => {
     console.log(error.message);
@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/add', (req, res) => {
-  res.render('student_add');
+  res.render('student/add');
 })
 
 app.post('/add', (req, res) => {
@@ -30,7 +30,7 @@ app.post('/add', (req, res) => {
   })
   .save()
   .then(success => {
-    res.render('student_add_success', { student: req.body });
+    res.render('student/add_success', { student: req.body });
   })
   .catch(error => {
     console.log(error.message);
@@ -43,7 +43,7 @@ app.get('/edit/:id', (req, res) => {
   models.Student
   .findById(id)
   .then(student => {
-    res.render('student_edit', { student })
+    res.render('student/edit', { student })
   })
   .catch(error => {
     console.log(error.message);
@@ -62,7 +62,7 @@ app.post('/edit/:id', (req, res) => {
   models.Student
   .update(newData, { where: { id: newData.id } } )
   .then(success => {
-    res.render('student_edit_success', { student: req.body})
+    res.render('student/edit_success', { student: req.body})
   })
   .catch(error => {
     console.log(error.message);
@@ -73,7 +73,7 @@ app.get('/delete/:id', (req, res) => {
   models.Student
   .destroy({ where: { id: req.params.id } })
   .then(success => {
-    res.redirect('/students');
+    res.redirect('student/students');
   })
   .catch(error => {
     console.log(error.message);

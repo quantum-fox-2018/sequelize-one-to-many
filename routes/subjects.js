@@ -5,12 +5,11 @@ const models  = require('../models');
 app.get('/', (req, res) => {
   models.Subject
   .findAll({
-    order: [
-      ['id', 'ASC']
-    ]
+    order: [['id', 'ASC']],
+    include: [{ model: models.Teacher }]
   })
   .then(subjects => {
-    res.render('subjects', { subjects })
+    res.render('subject/subjects', { subjects: subjects })
   })
   .catch(error => {
     console.log(error.message);
@@ -18,7 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/add', (req, res) => {
-  res.render('subject_add');
+  res.render('subject/add');
 })
 
 app.post('/add', (req, res) => {
@@ -28,7 +27,7 @@ app.post('/add', (req, res) => {
   })
   .save()
   .then(success => {
-    res.render('subject_add_success', { subject: req.body });
+    res.render('subject/add_success', { subject: req.body });
   })
   .catch(error => {
     console.log(error.message);
@@ -41,7 +40,7 @@ app.get('/edit/:id', (req, res) => {
   models.Subject
   .findById(id)
   .then(subject => {
-    res.render('subject_edit', { subject })
+    res.render('subject/edit', { subject: subject })
   })
   .catch(error => {
     console.log(error.message);
@@ -58,7 +57,7 @@ app.post('/edit/:id', (req, res) => {
   models.Subject
   .update(newData, { where: { id: newData.id } } )
   .then(success => {
-    res.render('subject_edit_success', { subject: req.body})
+    res.render('subject/edit_success', { subject: req.body})
   })
   .catch(error => {
     console.log(error.message);
@@ -69,7 +68,7 @@ app.get('/delete/:id', (req, res) => {
   models.Subject
   .destroy({ where: { id: req.params.id } })
   .then(success => {
-    res.redirect('/subjects');
+    res.redirect('subject/subjects');
   })
   .catch(error => {
     console.log(error.message);

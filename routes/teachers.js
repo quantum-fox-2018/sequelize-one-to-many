@@ -5,14 +5,12 @@ const models  = require('../models');
 app.get('/', (req, res) => {
   models.Teacher
   .findAll({
-    order: [
-      ['id', 'ASC']
-    ],
-    include: [models.Subject]
+    order: [['id', 'ASC']],
+    include: [{ model: models.Subject }]
   })
   .then(teachers => {
     console.log(teachers.Subject);
-    res.render('teachers', { teachers: teachers })
+    res.render('teacher/teachers', { teachers: teachers })
   })
   .catch(error => {
     console.log(error.message);
@@ -27,7 +25,7 @@ app.get('/add', (req, res) => {
     ],
   })
   .then(subjects => {
-    res.render('teacher_add', { subjects: subjects })
+    res.render('teacher/add', { subjects: subjects })
   })
   .catch(error => {
     console.log(error.message);
@@ -44,7 +42,7 @@ app.post('/add', (req, res) => {
   })
   .save()
   .then(success => {
-    res.render('teacher_add_success', { teacher: req.body });
+    res.render('teacher/add_success', { teacher: req.body });
   })
   .catch(error => {
     console.log(error.message);
@@ -56,13 +54,13 @@ app.get('/edit/:id', (req, res) => {
 
   models.Teacher
   .findById(id, {
-    include: [models.Subject]
+    include: [{ model: models.Subject }]
   })
   .then(teacher => {
     models.Subject
     .findAll()
     .then(subjects => {
-      res.render('teacher_edit', { teacher: teacher, subjects: subjects })
+      res.render('teacher/edit', { teacher: teacher, subjects: subjects })
     })
     .catch(error => {
       console.log(error.message);
@@ -86,7 +84,7 @@ app.post('/edit/:id', (req, res) => {
   models.Teacher
   .update(newData, { where: { id: newData.id } } )
   .then(success => {
-    res.render('teacher_edit_success', { teacher: req.body})
+    res.render('teacher/edit_success', { teacher: req.body})
   })
   .catch(error => {
     console.log(error.message);
@@ -97,7 +95,7 @@ app.get('/delete/:id', (req, res) => {
   models.Teacher
   .destroy({ where: { id: req.params.id } })
   .then(success => {
-    res.redirect('/teachers');
+    res.redirect('/teacher/teachers');
   })
   .catch(error => {
     console.log(error.message);
