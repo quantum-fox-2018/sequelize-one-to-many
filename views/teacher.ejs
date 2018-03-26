@@ -1,0 +1,31 @@
+<html>
+  <body>
+    <h1>Teacher's Page</h2>
+    <p><a href="/teacher/add">Add Teacher</a></p>
+    <table border="1" width="50%">
+      <tr>
+        <th>id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Subject ID</th>
+        <th>Option</th>
+      </tr>
+          <% for(var i = 0; i < all_teacher.length; i++) { %>
+          <tr>
+            <td><%= all_teacher[i].id %></td>
+            <td><%= all_teacher[i].first_name %></td>
+            <td><%= all_teacher[i].last_name %></td>
+            <td><%= all_teacher[i].email %></td>
+            <% if(all_teacher[i].SubjectId === null) { %>
+            <td>unassigned</td>
+            <% } else { %>
+            <td><%= all_teacher[i].Subject.subject_name %></td>
+            <% } %>
+            <td><a href='/teacher/edit/<%= all_teacher[i].id %>'>Edit</a> | <a href='/teacher/delete/<%= all_teacher[i].id %>' onclick="return confirm('delete this teacher?')">Delete</a></td>
+          </tr>
+          <% } %>
+    </table>
+    <p><a href="/"> home </a></p>
+  </body>
+</html>
