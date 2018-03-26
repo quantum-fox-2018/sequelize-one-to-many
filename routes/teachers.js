@@ -3,12 +3,19 @@ const routes = require('express').Router()
 const {Teacher} = require('../models')
 
 routes.get('/',function(req,res){
-  Teacher.findAll().then(teachers=>{
+  Teacher.withSubject().then(newDataTeachers=>{
     let obj = {
-      teachers: teachers
+      teachers: newDataTeachers
     }
+    // res.send(newDataTeacher[0].subject)
     res.render('teachers/teachers.ejs',obj)
   })
+  // Teacher.findAll().then(teachers=>{
+  //   let obj = {
+  //     teachers: teachers
+  //   }
+  //   res.render('teachers/teachers.ejs',obj)
+  // })
 })
 
 routes.get('/add',function(req,res){

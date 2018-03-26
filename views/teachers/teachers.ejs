@@ -22,7 +22,7 @@
           <% if(teachers[i].SubjectId==null){ %>
             <td>unassigned</td>
           <% } else { %>
-            <td><%= teachers[i].SubjectId %></td>
+            <td><%= teachers[i].subject.name %></td>
           <% } %>
           <td>
             <a href="/teachers/<%= teachers[i].id %>/edit">Edit</a>

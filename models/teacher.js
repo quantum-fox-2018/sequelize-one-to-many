@@ -35,6 +35,29 @@ module.exports = (sequelize, DataTypes) => {
     SubjectId: DataTypes.INTEGER
   }, {});
 
+  Teacher.withSubject = function(){
+    return new Promise(function(resolve, reject) {
+      Teacher.findAll().then(dataTeachers=>{
+        let promTS = dataTeachers.map(dataTeacher=>{
+          return new Promise(function(resolve, reject) {
+            dataTeacher.getSubject().then(subject=>{
+              dataTeacher.subject = subject
+              resolve(dataTeacher)
+            })
+            .catch(err=>{
+              reject(err)
+            })
+          });
+        })
+        Promise.all(promTS).then(newDataTeachers=>{
+          resolve(newDataTeachers)
+        }).catch(err=>{
+          reject(err)
+        })
+      })
+    });
+  }
+
   Teacher.associate = function(models) {
     Teacher.belongsTo(models.Subject)
   };
