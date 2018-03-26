@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Students</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <a href="/">Home</a>
+      </div>
+
+      <div>
+        <h2>Students Data</h2>
+        <h5><a href="/students/add">Add Student</a></h5>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <tr>
+            <th>id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Options</th>
+          </tr>
+          <% students.forEach( student => {%>
+          <tr>
+            <td><%= student.id %></td>
+            <td><%= student.first_name %></td>
+            <td><%= student.last_name %></td>
+            <td><%= student.email %></td>
+            <td>
+              <a href="/students/edit/<%= student.id %>">Edit </a>|
+              <a href="/students/delete/<%= student.id %>" onclick="return confirm('Are you sure want to delete this data?');"> Delete</a>
+            </td>
+          </tr>
+          <% })%>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Subjects</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <a href="/">Home</a>
+      </div>
+
+      <h2>Subjects Data</h2>
+      <h5><a href="/subjects/add">Add Subject</a></h5>
+
+      <div class="table-responsive">
+        <table class="table">
+          <tr>
+            <th>id</th>
+            <th>Subject Name</th>
+            <th>Options</th>
+          </tr>
+          <% subjects.forEach( subject => {%>
+          <tr>
+            <td><%= subject.id %></td>
+            <td><%= subject.subject_name %></td>
+            <td>
+              <a href="/subjects/edit/<%= subject.id %>">Edit </a>|
+              <a href="/subjects/delete/<%= subject.id %>" onclick="return confirm('Are you sure want to delete this data?');"> Delete</a>
+            </td>
+          </tr>
+          <% })%>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

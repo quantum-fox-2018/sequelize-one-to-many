@@ -1,1 +1,1 @@
-# sequelize-one-to-many
+# express-sequelize-crud
