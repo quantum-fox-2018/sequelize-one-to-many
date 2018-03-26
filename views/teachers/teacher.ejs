@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      .center {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1 class="center">All Teachers Data</h1>
+      <h5 class="center"><a class="center" href="/teachers/add">Add Teachers Data</a></h5>
+      <table class="table">
+        <tr>
+          <th>Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Subject</th>
+          <th>Action</th>
+        </tr>
+        <% for(let i = 0; i <teacherData.length; i++){ %>
+          <tr>
+            <td><%=teacherData[i].id%></td>
+            <td><%=teacherData[i].first_name%></td>
+            <td><%=teacherData[i].last_name%></td>
+            <td><%=teacherData[i].email%></td>
+            <td>
+            <% if(teacherData[i].subjectId !== null) { %>
+              <%= teacherData[i].Subject.subject_name %>
+            <% } else { %>
+              Unassigned
+            <% } %>
+            </td>
+            <td>
+            <a href="/teachers/edit/<%= teacherData[i].id %>" class="btn btn-success">Edit</a>
+            <a href="/teachers/delete/<%= teacherData[i].id %>" class="btn btn-success" onclick="return confirm('Are you sure you want to delete this Teacher?')">Delete</a>
+            </td>
+          </tr>
+        <% } %>
+
+      </table>
+    </div>
+    
+  </div>
+  </div>
+  </body>
+</html>
