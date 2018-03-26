@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <style>
+
+    body {
+      background-image: url('https://image.freepik.com/free-vector/school-building_23-2147521232.jpg');
+      background-size: cover;
+    }
+
+    h2 {
+      font-family: arial, sans-serif;
+      font-size: 25px;
+      text-align: center;
+    }
+
+    h4 {
+      font-family: arial, sans-serif;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: 18px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 200px;
+        background-color: #00BFFF;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #4169E1;
+    }
+
+    div {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      font-size: 8px;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: red;
+    }
+
+    select#soflow{
+      width: 100%;
+      height: 50px;
+      padding: 12px 20px;
+      margin: 8px 0;
+      font-size: 18px;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: white;
+    }
+
+    </style>
+  </head>
+  <body>
+
+    <h2>Add Teachers Form</h2>
+    <h4><a href="/teachers">Show All Teachers</a></h4>
+
+    <%if(condition){%>
+        <div>
+          <h1>
+            email salah atau email sudah terdaftar
+          </h1>
+        </div>
+      <%}
+    %>
+
+
+    <form action="/teachers/add" method="post">
+      First name:<br>
+      <input type="text" name="first_name" value="">
+      <br>
+      Last name:<br>
+      <input type="text" name="last_name" value="">
+      <br>
+      Email:<br>
+      <input type="text" name="email" value="">
+      <br>
+      Subject:<br>
+      <select name="subject" id="soflow">
+        <option>Select an Option</option>
+        <%
+        subjects.forEach(function(subject){%>
+          <option type="text" name= "subject" value=<%= subject.subject_name%>><%= subject.subject_name%></option>
+        <%})
+        %>
+      </select>
+      <br><br>
+      <input type="submit" onclick="return confirm('Are you sure?')" value="ADD TEACHER">
+    </form>
+
+  </body>
+
+</html>

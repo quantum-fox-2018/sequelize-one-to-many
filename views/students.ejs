@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+
+    body {
+      background-image: url('https://image.freepik.com/free-vector/school-building_23-2147521232.jpg');
+      background-size: cover;
+    }
+
+    h2 {
+      font-family: arial, sans-serif;
+      font-size: 25px;
+      text-align: center;
+    }
+
+    h4 {
+      font-family: arial, sans-serif;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #F5FFFA;
+    }
+    tr:nth-child(odd) {
+        background-color: #F0F8FF;
+    }
+    </style>
+  </head>
+  <body>
+
+    <h2>Data Students</h2>
+    <h4><a href="/">Home</a></h4>
+    <h4><a href="/students/add">Add Student</a></h4>
+
+    <table>
+      <tr>
+        <th>id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Options</th>
+      </tr>
+        <%
+          data_students.forEach(function(student){%>
+          <tr>
+            <td><%= student.id%></td>
+            <td><%= student.first_name%></td>
+            <td><%= student.last_name%></td>
+            <td><a href="/students/edit/<%= student.id%>">edit</a> | <a href="/students/delete/<%= student.id%>" onclick="return confirm('Are you sure want delete this student?')">delete</a></td>
+          </tr>
+          <%})
+        %>
+    </table>
+
+  </body>
+</html>
