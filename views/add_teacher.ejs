@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<%if(err!=="none"){%>
+  <h1><%=err%></h1>
+<%}%>
+  <head>
+    <meta charset="utf-8">
+    <title>add Teacher</title>
+  </head>
+  <body>
+    <form class="" action="/teachers/add" method="post">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" name="firstName" placeholder="Enter FirstName">
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" name="lastName" placeholder="Enter LastName">
+      </div>
+
+      <div class="form-group">
+        <label for="email">email</label>
+        <input type="text" class="form-control" name="email" placeholder="Enter email">
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <select name="subject">
+          <%for(let i =0; i<subjectData.length; i++){%>
+          <option value="<%=subjectData[i].id%>">
+            <%=subjectData[i].subjectName%>
+          </option>
+          <%}%>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </body>
+</html>

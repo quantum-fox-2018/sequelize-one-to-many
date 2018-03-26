@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Teacher</title>
+  </head>
+  <body>
+    <%if(err!=="none"){%>
+      <h1><%=err%></h1>
+    <%}%>
+    <form action="/teachers/edit/<%=teacherData.id%>" method="post">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" name="firstName" placeholder="Enter FirstName" value="<%=teacherData.firstName%>">
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" name="lastName" placeholder="Enter LastName" value="<%=teacherData.lastName%>">
+      </div>
+
+      <div class="form-group">
+        <label for="email">email</label>
+        <input type="text" class="form-control" name="email" placeholder="Enter email" value="<%=teacherData.email%>">
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <select name="subject">
+          <%for(let i =0; i<subjectData.length; i++){%>
+          <option value="<%=subjectData[i].id%>"
+            <%if(subjectData[i].id === teacherData.SubjectId){%>
+            selected ="selected"
+            <%}%>
+          >
+            <%=subjectData[i].subjectName%>
+          </option>
+          <%}%>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </body>
+</html>
