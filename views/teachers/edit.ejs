@@ -23,14 +23,7 @@
       <input type="text" name="email" value= <%= teacher.email%>>
       <br>
       Subject:<br>
-      <select name="subject" id="soflow">
-        <option>Select an Option</option>
-        <%
-        subjects.forEach(function(subject){%>
-          <option type="text" name= "subject" value=<%= subject.subject_name%>><%= subject.subject_name%></option>
-        <%})
-        %>
-      </select>
+      <%- include('../partials/subject-list.ejs')%>
       <br><br>
       <input type="submit" onclick="return confirm('Are you sure?')" value="EDIT TEACHER">
     </form>

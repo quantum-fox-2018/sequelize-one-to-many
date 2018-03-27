@@ -58,8 +58,6 @@ router.post('/add', function(req,res){
         res.render('teachers/add.ejs', {subjects: subjects, condition: emailCond, message: err.message})
       })
     })
-
-
   })
 })
 

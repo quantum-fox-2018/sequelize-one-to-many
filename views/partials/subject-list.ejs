@@ -1,0 +1,8 @@
+ <select name="subject" id="soflow">
+  <option>Select an Option</option>
+  <%
+  subjects.forEach(function(subject){%>
+    <option type="text" name= "subject" value=<%= subject.subject_name%>><%= subject.subject_name%></option>
+  <%})
+  %>
+</select>
