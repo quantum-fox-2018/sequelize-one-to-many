@@ -1,11 +1,4 @@
-<html>
-  <head>
-    <title>
-      Data Teachers
-    </title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  </head>
-  <body>
+<% include partials/header %>
     <h2>Teachers Data</h2>
     <a href="/teachers/add">add Teacher</a>
 
@@ -13,7 +6,7 @@
       <thead>
         <tr>
           <th>Id</th>
-          <th>Firt Name</th>
+          <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
           <th>Subject</th>
@@ -27,9 +20,7 @@
             <td><%= Teachers[i].first_name %></td>
             <td><%= Teachers[i].last_name %></td>
             <td><%= Teachers[i].email %></td>
-            <% let subject = 'unassigned'%>
-            <% if(Teachers[i].Subject !== null ){ subject = Teachers[i].Subject.subject_name }%>
-            <td><%= subject %></td>
+            <td><%= asignSubject(Teachers[i].Subject) %></td>
 
             <td>
               <a href="/teachers/edit/<%= Teachers[i].id %>">Edit</a>

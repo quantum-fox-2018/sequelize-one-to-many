@@ -7,6 +7,10 @@
       input[type=text]{
         width: 100%;
       }
+      .error{
+        padding: 5px;
+        background-color: red;
+      }
     </style>
   </head>
   <body>
@@ -14,7 +18,12 @@
     <h4>
       <a href="/teachers">show all data</a>
     </h4>
-    <form action="/teachers/editResult/<%= teachersData.id  %>" method="POST">
+    <% if(message !== '') {%>
+      <div class="error">
+        <%= message %>
+      </div>
+    <% } %>
+    <form action="/teachers/edit/<%= teachersData.id  %>" method="POST">
       <label for="first_name">First Name :</label><br>
       <input type="text" name="first_name" value="<%= teachersData.first_name  %>"/><br><br>
       <label for="last_name">Last Name :</label><br>
