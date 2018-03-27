@@ -103,7 +103,7 @@ app.post('/teachers/add', function(req,res){
   let email = req.body.email
   let subject = req.body.subject
 
-  Model.Subject.findOne({where: {subject_name:subject}, raw:true})
+  Model.Subject.findOne({where: {subject_name:subject}})
   .then(data_subject=>{
     let objNewTeacher = {
       SubjectId: data_subject.id,
@@ -113,6 +113,7 @@ app.post('/teachers/add', function(req,res){
       createdAt: new Date()
     }
     let emailCond = true;
+
     Model.Teacher.create(objNewTeacher)
     .then((data)=>{
       res.redirect('/teachers')
@@ -121,9 +122,11 @@ app.post('/teachers/add', function(req,res){
       let emailCond = true;
       Model.Subject.findAll()
       .then(subjects=>{
-        res.render('add_teacher_form.ejs', {subjects: subjects, condition: emailCond})
+        res.render('add_teacher_form.ejs', {subjects: subjects, condition: emailCond, message: err.message})
       })
     })
+
+
   })
 })
 
@@ -134,7 +137,8 @@ app.get('/teachers/edit/:teacher_id', function(req,res){
   .then(data_teacher =>{
     Model.Subject.findAll({raw:true})
     .then(subjects=>{
-      res.render('edit_teacher', {teacher: data_teacher, subjects:subjects})
+      let emailCond = false;
+      res.render('edit_teacher', {teacher: data_teacher, subjects:subjects, condition:emailCond})
     })
   })
 
@@ -160,6 +164,16 @@ app.post('/teachers/edit', function(req,res){
     Model.Teacher.update(newData, {where: { id: teacher_id }})
     .then(()=>{
       res.redirect('/teachers')
+    })
+    .catch(err=>{
+      let emailCond = true;
+      Model.Subject.findAll()
+      .then(subjects=>{
+        Model.Teacher.findOne({where: {id: teacher_id}})
+        .then(data_teacher=>{
+          res.render('edit_teacher.ejs', {teacher: data_teacher, subjects: subjects, condition: emailCond, message: err.message})
+        })
+      })
     })
   })
 })

@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         isUniqueEmail: function(email, callback){
           Teacher.findOne({where: {email:email}}).then(data=>{
-            callback(data)
+            if(data) {
+              callback('email sudah ada')
+            } else {
+              callback()
+            }
           })
         }
       }
