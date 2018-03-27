@@ -1,0 +1,21 @@
+<html>
+  <body>
+    <h1>Subject's Page</h2>
+    <p><a href="/subject/add">Add Subject</a></p>
+    <table border="1" width="50%">
+      <tr>
+        <th>id</th>
+        <th>Subject</th>
+        <th>Option</th>
+      </tr>
+          <% for(var i = 0; i < all_subject.length; i++) { %>
+          <tr>
+            <td><%= all_subject[i].id %></td>
+            <td><%= all_subject[i].subject_name %></td>
+            <td><a href='/subject/edit/<%= all_subject[i].id %>'>Edit</a> | <a href='/subject/delete/<%= all_subject[i].id %>' onclick="return confirm('delete this subject?')">Delete</a></td>
+          </tr>
+          <% } %>
+    </table>
+    <p><a href="/"> home </a></p>
+  </body>
+</html>

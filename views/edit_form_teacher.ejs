@@ -1,0 +1,19 @@
+<html>
+  <body>
+    <h2>Edit Teacher Data</h2>
+      <p><a href='/teacher'> show all data </a></p>
+      <form action = '/teacher/edit/<%= all_teacher.id%>' method='POST'>
+        First Name:<br>
+        <input type="text" name='first_name' value="<%= all_teacher.first_name%>">
+        <br>
+        Last Name: <br>
+        <input type="text" name='last_name' value='<%=all_teacher.last_name%>'>
+        <br>
+        Email: <br>
+        <input type="text" name='email' value='<%=all_teacher.email%>'>
+        <br>
+        <input type="submit" value='Edit Teacher'>
+        <br>
+        <p><a href="/"> home </a></p>
+  </body>
+</html>
