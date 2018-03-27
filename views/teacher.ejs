@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<center>
+<h2>List Teachers</h2>
+</center>
+<nav>
+    <tr>
+      <th><a href="/students">Students</a></th>
+      <th><a href="/teachers">Teachers</a></th>
+      <th><a href="/subjects">Subjects</a></th>
+      <th><a href="/">Home</a></th>
+    </tr>
+</nav>
+<table>
+  <tr>
+    <th>Id</th>
+    <th>firstname</th>
+    <th>lastname</th>
+    <th>email</th>
+    <th>subject</th>
+    <th>option</th>
+  </tr>
+        <% teachers.forEach(function(teacher) { %>
+<tr>
+      <td><%= teacher.id%></td>
+      <td><%= teacher.firstname %> </td>
+      <td><%= teacher.lastname %> </td>
+      <td><%= teacher.email %> </td>
+      <td><%= teacher.subject %> </td>
+      <td><a href="/teachers/edit/<%= teacher.id%>", (req, res)>Edit</a> |<a href="/teachers/delete/<%= teacher.id%>" onclick="return confirm('Are you sure ?')">delete</a></td>
+</tr>
+      <% }); %>
+</table>
+<h4><a href="/teachers/add">Add Teacher</a></h4>
+</body>
+</html>

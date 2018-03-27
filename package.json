@@ -1,0 +1,22 @@
+{
+  "name": "sequelize-one-to-many",
+  "version": "1.0.0",
+  "description": "",
+  "main": "apps.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quantum-fox-2018/sequelize-one-to-many.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quantum-fox-2018/sequelize-one-to-many/issues"
+  },
+  "homepage": "https://github.com/quantum-fox-2018/sequelize-one-to-many#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

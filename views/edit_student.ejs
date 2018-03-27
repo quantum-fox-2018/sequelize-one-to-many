@@ -1,0 +1,32 @@
+<html>
+
+  <head>
+
+
+
+  </head>
+  <body>
+
+    <h2>Edit Students Data</h2>
+    <h2><a href="/">Home</a></<h2>
+    <h4><a href="/students">Show All Students</a></h4>
+
+
+    <form action="/students/edit" method="post">
+
+      <input name="studentId" type="hidden" value=<%= student.id%>>
+      First name:<br>
+      <input type="text" name="first_name" value=<%= student.firstname%>>
+      <br>
+      Last name:<br>
+      <input type="text" name="last_name" value= <%= student.lastname%>>
+      <br>
+      email:<br>
+      <input type="text" name="email" value= <%= student.email%>>
+      <br><br>
+      <input type="submit" onclick="return confirm('Are you sure?')" value="EDIT STUDENT">
+    </form>
+
+  </body>
+
+</html>
