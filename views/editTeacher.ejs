@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Teacher</title>
+</head>
+<body>
+    <h1 style="text-align: center">Edit Teacher Data</h1>
+    <a href="/teachers">show all data</a>
+    <label><%= err%></label>
+    <form action="/teachers/edit/<%= teacherData.id%>" method="POST">
+        First name:<br>
+        <input type="text" name="firstname" value="<%= teacherData.first_name%>">
+        <br>
+        Last name:<br>
+        <input type="text" name="lastname" value="<%= teacherData.last_name%>">
+        <br>
+        Email:<br>
+        <input type="text" name="email" value="<%= teacherData.email%>">
+        <br>
+        Subject:
+        <br>
+        <select name="subject" style="width: 190px">
+            <%for(let index = 0; index<subjectData.length; index++){%>
+                <option value="<%= subjectData[index].id%>"><%= subjectData[index].subject_name%></option>    
+            <%}%>
+        </select>
+        <br>
+        <input type="submit" value="Edit Teacher">
+    </form> 
+</body>
+</html>
