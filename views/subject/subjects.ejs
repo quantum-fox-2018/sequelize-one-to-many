@@ -12,27 +12,8 @@
       <h2>Subjects Data</h2>
       <h5><a href="/subjects/add">Add Subject</a></h5>
 
-      <div class="table-responsive">
-        <table class="table">
-          <tr>
-            <th>id</th>
-            <th>Subject Name</th>
-            <th>Teachers</th>
-            <th>Options</th>
-          </tr>
-          <% subjects.forEach( subject => {%>
-          <tr>
-            <td><%= subject.id %></td>
-            <td><%= subject.subject_name %></td>
-            <td><%= subject.Teachers.map(t => ` ${t.first_name} ${t.last_name}`)%></td>
-            <td>
-              <a href="/subjects/edit/<%= subject.id %>">Edit </a>|
-              <a href="/subjects/delete/<%= subject.id %>" onclick="return confirm('Are you sure want to delete this data?');"> Delete</a>
-            </td>
-          </tr>
-          <% })%>
-        </table>
-      </div>
+      <%- include('_table_subjects') %>
+
     </div>
   </body>
 </html>

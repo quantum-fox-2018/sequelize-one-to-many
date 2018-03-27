@@ -1,8 +1,8 @@
 const express = require('express');
-const app     = express.Router();
+const router  = express.Router();
 const models  = require('../models');
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   models.Subject
   .findAll({
     order: [['id', 'ASC']],
@@ -16,11 +16,11 @@ app.get('/', (req, res) => {
   })
 })
 
-app.get('/add', (req, res) => {
+router.get('/add', (req, res) => {
   res.render('subject/add');
 })
 
-app.post('/add', (req, res) => {
+router.post('/add', (req, res) => {
   models.Subject
   .build({
     subject_name : req.body.subject_name
@@ -34,7 +34,7 @@ app.post('/add', (req, res) => {
   })
 })
 
-app.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', (req, res) => {
   let id = req.params.id;
 
   models.Subject
@@ -47,7 +47,7 @@ app.get('/edit/:id', (req, res) => {
   })
 })
 
-app.post('/edit/:id', (req, res) => {
+router.post('/edit/:id', (req, res) => {
   let newData = {
     id            : req.params.id,
     subject_name  : req.body.subject_name
@@ -64,15 +64,22 @@ app.post('/edit/:id', (req, res) => {
   })
 })
 
-app.get('/delete/:id', (req, res) => {
+router.get('/delete/:id', (req, res) => {
   models.Subject
-  .destroy({ where: { id: req.params.id } })
-  .then(success => {
-    res.redirect('subject/subjects');
+  .destroy({ where: {id: req.params.id}})
+  .then(next => {
+    models.Teacher
+    .update({SubjectId: null}, {where: {SubjectId: req.params.id}})
+    .then(success => {
+      res.redirect('/subjects');
+    })
+    .catch(error => {
+      console.log(error.message);
+    })
   })
   .catch(error => {
     console.log(error.message);
   })
 })
 
-module.exports = app;
+module.exports = router;

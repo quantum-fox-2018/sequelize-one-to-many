@@ -2,29 +2,48 @@
   <head>
     <title>Teachers Edit</title>
   </head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <body>
-    <h1>Edit Teachers Data</h1>
-    <a href="/teachers/">Show All Data</a>
+    <div class="container">
 
-    <form action="/teachers/edit/<%= teacher.id %>" method="post">
-      First name:<br>
-      <input type="text" name="first_name" value="<%= teacher.first_name %>"><br>
-      Last name:<br>
-      <input type="text" name="last_name" value="<%= teacher.last_name %>"><br>
-      Email:<br>
-      <input type="text" name="email" value="<%= teacher.email %>"><br>
-      Subject:<br>
-      <select class="" name="SubjectId">
-        <% subjects.forEach(subject => { %>
-          <% if (teacher.SubjectId == subject.id) { %>
-            <option value="<%= subject.id %>" selected><%= subject.subject_name %></option>
-          <% } else { %>
-            <option value="<%= subject.id %>"><%= subject.subject_name %></option>
-          <% } %>
-        <% }) %>
-      </select>
-      <br>
-      <button type="submit">Update</button>
-    </form>
+      <div class="">
+        <h1>Edit Teachers Data</h1>
+        <a href="/teachers/">Show All Data</a>
+      </div>
+
+      <% if (typeof error != 'undefined') { %>
+        <div class="alert alert-danger">
+          <%= error %>
+        </div>
+      <% } %>
+
+      <form action="/teachers/edit/<%= teacher.id %>" method="post">
+        First name:<br>
+        <input type="text" name="first_name" value="<%= teacher.first_name %>"><br>
+        Last name:<br>
+        <input type="text" name="last_name" value="<%= teacher.last_name %>"><br>
+        Gender:<br>
+        <select class="" name="gender">
+          <option value=""></option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select><br>
+        Email:<br>
+        <input type="text" name="email" value="<%= teacher.email %>"><br>
+        Subject:<br>
+        <select class="" name="SubjectId">
+          <% subjects.forEach(subject => { %>
+            <% if (teacher.SubjectId == subject.id) { %>
+              <option value="<%= subject.id %>" selected><%= subject.subject_name %></option>
+            <% } else { %>
+              <option value="<%= subject.id %>"><%= subject.subject_name %></option>
+            <% } %>
+          <% }) %>
+        </select>
+        <br>
+        <button type="submit">Update</button>
+      </form>
+
+    </div>
   </body>
 </html>
