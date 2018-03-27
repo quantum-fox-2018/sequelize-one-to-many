@@ -1,0 +1,118 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Sekolah</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/teachers">Teacher</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/subjects">Subject</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/students">Student</a>
+                    </li>
+                    </ul>
+                </div>
+            </nav>
+            <br><br><br>
+            <h1>Student's Data</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% studentsData.forEach(function(student){ %>
+                        <tr>
+                            <td>
+                                <%= student.id %>
+                            </td>
+                            <td>
+                                <%= student.first_name %>
+                            </td>
+                            <td>
+                                <%= student.last_name %>
+                            </td>
+                            <td>
+                                <%= student.email %>
+                            </td>
+                            <td><a href="/students/edit/<%= student.id %>">Edit</a> | <a data-target="#<%= student.id %>" data-toggle="modal"  href="#<%= student.id %>">Delete</a></td>
+                        </tr>
+                        <!-- Modal -->
+                        <div class="modal" id="<%= student.id %>" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Delete student</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Delete selected student ?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="POST" action="/students/delete/<%= student.id %>">
+                                            <input class="btn btn-primary" type="submit" value="Yes">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        <% }) %>
+                </tbody>
+            </table>
+            <br><br>
+            <% if (alert) { %>
+                <% if (alert.includes('Success')) { %>
+                    <div class="alert alert-success" role="alert">
+                        <%= alert%>
+                    </div>
+                <% }else { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= alert%>
+                    </div>
+                <% } %>
+            <% } %>
+            <h1>Add Student Data</h1>
+            <form method="POST" action="/students/add">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" name="first_name">
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" name="last_name">
+                </div>
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="text" class="form-control" name="email">
+                </div>
+                <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+            </form>
+    </div>     
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
