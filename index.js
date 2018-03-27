@@ -3,7 +3,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const model = require('./models');
-const prefix = require('./helper_add_prefix_teacher.js');
 
 let app = express();
 app.set('view engine', 'ejs');
@@ -13,159 +12,16 @@ app.use(bodyParser.urlencoded({extended:false}));
 //================
 //TEACHERS
 //================
-app.get('/teachers', function(req,res){
-    res.locals.addPrefix = prefix
-    model.Teacher.findAll({
-        include: {model: model.Subject}
-    })
-    .then(function(teacherData){
-        res.render('teachers', {teacherData: teacherData});
-    })
-})
 
-app.get('/teachers/add', function(req, res){
-    let message = '';
-    res.render('addTeacher', {err: message});
-})
-
-app.post('/teachers/add', function(req, res){
-    model.Teacher.create({
-        first_name: req.body.firstname,
-        last_name: req.body.lastname,
-        email: req.body.email
-    })
-    .then(function(){
-        res.redirect('/teachers')
-    })
-    .catch(function(err){
-        // console.log(err.message);
-        // let error = err.message;
-        res.render('addTeacher', {err: err});
-    })
-})
-
-app.get('/teachers/edit/:id', function(req, res){
-    model.Teacher.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(function(teacherData){
-        model.Subject.findAll({})
-        .then(function(subjectData){
-            res.render('editTeacher', {teacherData: teacherData, subjectData: subjectData});
-        })  
-    })
-    .catch(function(err){
-        console.log(err);
-    })
-})
-
-app.post('/teachers/edit/:id', function(req, res){
-    model.Teacher.update({
-        SubjectId: req.body.subject,
-        first_name: req.body.firstname,
-        last_name: req.body.lastname,
-        email: req.body.email,
-    },{
-        where: {id: req.params.id}
-    })
-    .then(function(){
-        res.redirect('/teachers')
-    })
-    .catch(function(err){
-        console.log(err);
-    })
-})
-
-app.get('/teachers/delete/:id', function(req, res){
-    model.Teacher.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(function(){
-        res.redirect('/teachers')
-    })
-    .catch(function(err){
-        console.log(err);
-    })
-})
+var routeTeacher = require('./routes/teachers.js');
+app.use('/teachers', routeTeacher);
 
 //==================
 //STUDENTS
 //==================
-app.get('/students', function(req, res){
-    model.Student.findAll()
-    .then(function(studentData){
-        res.render('students', {studentData: studentData});
-    })
-    .catch(function(err){
-        console.log(err);
-    })
-})
 
-app.get('/students/addStudent', function(req, res){
-    res.render('addStudent');
-})
-
-app.post('/students/addNewStudent', function(req, res){
-    model.Student.create({
-        first_name: req.body.firstname,
-        last_name: req.body.lastname,
-        email: req.body.email
-    })
-    .then(function(){
-        res.redirect('/students');
-    })
-    .catch(function(err){
-        console.log(err);
-    })
-})
-
-app.get('/students/edit/:id', function(req, res){
-    model.Student.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(function(studentData){
-        res.render('editStudent', {studentData});
-    })
-    .catch(function(err){
-        console.log(err);
-    })
-})
-
-app.post('/students/edit/:id', function(req, res){
-    model.Student.update({
-        first_name: req.body.firstname,
-        last_name: req.body.lastname,
-        email: req.body.email,
-    },{
-        where: {id: req.params.id}
-    })
-    .then(function(){
-        res.redirect('/students');
-    })
-    .catch(function(err){
-        console.log(err);
-    })
-})
-
-app.get('/students/delete/:id', function(req, res){
-    model.Student.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(function(){
-        res.redirect('/students');
-    })
-    .catch(function(err){
-        console.log(err);
-    })
-})
+var routeStudent = require('./routes/students.js');
+app.use('/students', routeStudent);
 
 //=====================
 //SUBJECTS

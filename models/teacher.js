@@ -11,17 +11,27 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'email format is incorrect'
         },
-
-      }
+        isUnique(value, callback){
+          let where = {email:value};
+          if(this.id != null){
+            where = {email:value, id:{$ne: this.id}}
+          }
+          Teacher.findOne({where})
+          .then(function(errorMessage, dataTeacher){
+            if(dataTeacher == null){
+              callback();
+            }else if(dataTeacher.length != 0){
+              callback('Email must be unique!');
+            } 
+          })
+        }
+      },
     }
   }, {
-    indexes: [{
-      unique: true,
-      fields: ['email']
-    }],
     hooks: {
       beforeValidate: function(Teacher, options){
         console.log('VALIDATION START!');
+        
       },
       afterValidate: function(Teacher, options){
         console.log('VALIDATION ENDED');

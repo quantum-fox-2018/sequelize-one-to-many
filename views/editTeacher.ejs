@@ -6,6 +6,7 @@
 <body>
     <h1 style="text-align: center">Edit Teacher Data</h1>
     <a href="/teachers">show all data</a>
+    <label><%= err%></label>
     <form action="/teachers/edit/<%= teacherData.id%>" method="POST">
         First name:<br>
         <input type="text" name="firstname" value="<%= teacherData.first_name%>">
