@@ -1,4 +1,8 @@
 'use strict';
+
+const sequelize = require('sequelize');
+const Op = sequelize.Op
+
 module.exports = (sequelize, DataTypes) => {
   var Teacher = sequelize.define('Teacher', {
     SubjectId: DataTypes.INTEGER,
@@ -13,7 +17,11 @@ module.exports = (sequelize, DataTypes) => {
           msg: "email salah"
         },
         isUniqueEmail: function(email, callback){
-          Teacher.findOne({where: {email:email}}).then(data=>{
+          let filter = {email:email}
+          if(this.id != null){
+            filter = {email:email, id : {[Op.ne]:this.id }}
+          }
+          Teacher.findOne({where: filter}).then(data=>{
             if(data) {
               callback('email sudah ada')
             } else {

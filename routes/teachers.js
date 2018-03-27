@@ -7,7 +7,6 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'ejs')
 
-
 router.get('/', function(req,res){
 
   Model.Teacher.findAll({include: [Model.Subject], order: [['id', 'ASC']]}).then(teachers=>{
@@ -38,13 +37,13 @@ router.post('/add', function(req,res){
   Model.Subject.findOne({where: {subject_name:subject}})
   .then(data_subject=>{
     let objNewTeacher = {
+
       SubjectId: data_subject.id,
       first_name: firstName,
       last_name: lastName,
       email: email,
       createdAt: new Date()
     }
-    let emailCond = true;
 
     Model.Teacher.create(objNewTeacher)
     .then((data)=>{
@@ -87,6 +86,7 @@ router.post('/edit', function(req,res){
   Model.Subject.findOne({where: {subject_name:subject}, raw:true})
   .then(data_subject=>{
     let newData = {
+      id: teacher_id,
       SubjectId: data_subject.id,
       first_name: firstName,
       last_name: lastName,

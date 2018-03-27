@@ -9,9 +9,10 @@ app.set('view engine', 'ejs')
 
 router.get('/',function(req,res){
 
+  let checkCond = false;
   Model.Subject.findAll({include: [Model.Teacher],order: [['id', 'ASC']]}).then(subjects=>{
     let data_subjects = subjects.map(s => s.dataValues);
-    res.render('subjects/index.ejs', { data_subjects: subjects})
+    res.render('subjects/index.ejs', { data_subjects: subjects, condition: checkCond})
   })
 })
 
@@ -64,12 +65,25 @@ router.post('/edit', function(req,res){
 router.get('/delete/:subject_id', function(req,res){
 
   let subjectId = req.params.subject_id
-  Model.Subject.destroy({where: {id: subjectId}})
-  .then(()=>{
-    Model.Teacher.findOne({where: {SubjectId: subjectId}})
-
-    res.redirect('/subjects')
+  Model.Teacher.findAll({where: {SubjectId: subjectId}})
+  .then((teachers)=>{
+    if(teachers.length==0){
+      Model.Subject.destroy({where: {id: subjectId}, individualHooks: true})
+      .then(()=>{
+        res.redirect('/subjects')
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }else{
+      let checkCond = true;
+      Model.Subject.findAll({include: [Model.Teacher],order: [['id', 'ASC']]}).then(subjects=>{
+        let data_subjects = subjects.map(s => s.dataValues);
+        res.render('subjects/index.ejs', { data_subjects: subjects, condition: checkCond, message: "Subject sedang digunakan"})
+      })
+    }
   })
+
 
 })
 
