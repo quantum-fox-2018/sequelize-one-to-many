@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <%- include('../partials/css.form.ejs')  %>
+  </head>
+  <body>
+
+    <h2>Add Subjects Form</h2>
+    <h4><a href="/subjects">Show All Subjects</a></h4>
+
+    <form action="/subjects/add" method="post">
+      Subject name:<br>
+      <input type="text" name="subject_name" value="">
+      <br><br>
+      <input type="submit" value="ADD SUBJECT">
+    </form>
+
+  </body>
+
+</html>
