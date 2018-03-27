@@ -8,14 +8,7 @@
     <h2>Edit Teachers Data</h2>
     <h4><a href="/teachers">Show All Teachers</a></h4>
 
-    <%if(condition){%>
-        <div>
-          <h1>
-            <%= message%>
-          </h1>
-        </div>
-      <%}
-    %>
+    <%- include('../partials/error.message.ejs')  %>
 
     <form action="/teachers/edit" method="post">
 

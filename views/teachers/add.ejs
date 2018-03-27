@@ -7,15 +7,7 @@
     <h2>Add Teachers Form</h2>
     <h4><a href="/teachers">Show All Teachers</a></h4>
 
-    <%if(condition){%>
-        <div>
-          <h1>
-            <%= message%>
-          </h1>
-        </div>
-      <%}
-    %>
-
+    <%- include('../partials/error.message.ejs')  %>
 
     <form action="/teachers/add" method="post">
       First name:<br>
@@ -39,7 +31,6 @@
       <br><br>
       <input type="submit" value="ADD TEACHER">
     </form>
-
   </body>
 
 </html>

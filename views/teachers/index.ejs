@@ -26,12 +26,8 @@
             <td><%= teacher.last_name%></td>
             <td><%= teacher.email%></td>
             <td>
-              <%
-                if(teacher.SubjectId !==null){%>
-                  <%= teacher.Subject.subject_name%>
-                <%}else{%>
-                  Unassigned
-                <%}
+              <%=
+                assignedSubject(teacher)
               %>
             </td>
             <td><a href="/teachers/edit/<%= teacher.id%>">edit</a> | <a href="/teachers/delete/<%= teacher.id%>" onclick="return confirm('Are you sure want delete this teacher?')">delete</a></td>

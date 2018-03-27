@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 const Model = require('../models/index.js')
 var bodyParser = require('body-parser')
+const assigned_subject = require('../helper/assigned_subject.js');
 
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -11,6 +12,7 @@ router.get('/', function(req,res){
 
   Model.Teacher.findAll({include: [Model.Subject], order: [['id', 'ASC']]}).then(teachers=>{
     let dataTeachers = teachers.map(t => t.dataValues);
+    res.locals.assignedSubject = assigned_subject
     res.render('teachers/index.ejs',{data_teachers: dataTeachers})
   })
   .catch(err=>{
