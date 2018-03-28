@@ -1,0 +1,47 @@
+<html>
+  <body>
+    <h2>Edit Teacher Data</h2>
+      <p><a href='/teacher'> show all data </a></p>
+
+      <form action="/teacher/edit/<%= teacher.id%>" method="POST">
+      <table>
+          <tr>
+            <td>First Name :</td>
+            <td><input type="text" name="fname" value="<%= teacher.first_name%>"/></td>
+          </tr>
+          <tr>
+            <td>Last Name :</td>
+            <td><input type="text" name="lname" value="<%= teacher.last_name%>"/></td>
+          </tr>
+          <tr>
+            <td>Email :</td>
+            <td><input type="text" name="email" value="<%= teacher.email%>" /></td>
+          </tr>
+          <tr>
+            <td>Subject :</td>
+            <td>
+              <select name = "subject">
+                <option value='0'> ---- </option>
+                <% for(let j = 0; j < subject.length; j++){ let select ="" %>
+
+                  <option value = '<%- subject[j].id %>'
+                     <% if(subject[j].id === teacher.subjectId){ %>
+                    selected = "selected"
+                  <% } %>
+                  >
+                    <%= subject[j].name %>
+                  </option>
+                <% } %>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><input type="submit" value="Add Teacher" /></td>
+          </tr>
+      </table>
+      </form>
+
+
+      <p><a href="/"> home </a></p>
+  </body>
+</html>

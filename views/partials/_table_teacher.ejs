@@ -1,0 +1,31 @@
+<table style="padding: 10px;">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Subject</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+<tbody>
+  <% for(let i=0; i < teachers.length; i++){ %>
+    <tr>
+      <td><%= teachers[i].id %></td>
+      <td><%= teachers[i].first_name %></td>
+      <td><%= teachers[i].last_name %></td>
+      <td><%= teachers[i].email %></td>
+      <% if(teachers[i].subjectId === 0){ %>
+      <td>unassigned</td>
+      <% }else{ %>
+      <td><%= teachers[i].Subject.name %></td>
+      <% } %>
+      <td>
+        <a href='/teacher/edit/<%= teachers[i].id %>'>Edit</a> |
+        <a href='/teacher/delete/<%= teachers[i].id%>'>Delete</a>
+      </td>
+    </tr>
+  <% } %>
+</tbody>
+</table>
