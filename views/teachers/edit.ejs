@@ -1,0 +1,33 @@
+<html>
+
+  <head>
+    <%- include('../partials/css.form.ejs')  %>
+  </head>
+  <body>
+
+    <h2>Edit Teachers Data</h2>
+    <h4><a href="/teachers">Show All Teachers</a></h4>
+
+    <%- include('../partials/error.message.ejs')  %>
+
+    <form action="/teachers/edit" method="post">
+
+      <input name="teacherId" type="hidden" value=<%= teacher.id%>>
+      First name:<br>
+      <input type="text" name="first_name" value=<%= teacher.first_name%>>
+      <br>
+      Last name:<br>
+      <input type="text" name="last_name" value= <%= teacher.last_name%>>
+      <br>
+      Email:<br>
+      <input type="text" name="email" value= <%= teacher.email%>>
+      <br>
+      Subject:<br>
+      <%- include('../partials/subject-list.ejs')%>
+      <br><br>
+      <input type="submit" onclick="return confirm('Are you sure?')" value="EDIT TEACHER">
+    </form>
+
+  </body>
+
+</html>

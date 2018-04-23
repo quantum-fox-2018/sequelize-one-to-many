@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <%- include('../partials/css.form.ejs')  %>
+  </head>
+  <body>
+
+    <h2>Add Students Form</h2>
+    <h4><a href="/students">Show All Students</a></h4>
+
+    <form action="/students/add" method="post">
+      First name:<br>
+      <input type="text" name="first_name" value="">
+      <br>
+      Last name:<br>
+      <input type="text" name="last_name" value="">
+      <br><br>
+      <input type="submit" value="ADD STUDENT">
+    </form>
+
+  </body>
+
+</html>

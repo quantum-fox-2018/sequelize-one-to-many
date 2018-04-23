@@ -1,1 +1,0 @@
-# sequelize-one-to-many
