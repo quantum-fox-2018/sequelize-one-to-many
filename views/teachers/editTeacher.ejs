@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>
+      Edit Teacher
+    </title>
+    <style>
+      input[type=text]{
+        width: 100%;
+      }
+      .error{
+        padding: 5px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Edit Teachers Data</h2>
+    <h4>
+      <a href="/teachers">show all data</a>
+    </h4>
+    <% if(message !== '') {%>
+      <div class="error">
+        <%= message %>
+      </div>
+    <% } %>
+    <form action="/teachers/edit/<%= teachersData.id  %>" method="POST">
+      <label for="first_name">First Name :</label><br>
+      <input type="text" name="first_name" value="<%= teachersData.first_name  %>"/><br><br>
+      <label for="last_name">Last Name :</label><br>
+      <input type="text" name="last_name" value="<%= teachersData.last_name  %>" /><br><br>
+      <label for="email">Email :</label><br>
+      <input type="text" name="email" value="<%= teachersData.email  %>" /><br><br>
+      <select name="SubjectId">
+        <option value="unassigned" selected disabled>Pilih Subject</option>
+        <% for(let i = 0; i < Subject.length; i++) { %>
+          <option value="<%= Subject[i].id %>" name="subjectName"><%= Subject[i].subject_name %></option>
+        <% } %>
+      </select><br><br>
+      <input type="submit" value="Edit Student" />
+    </form>
+  </body>
+
+</html>

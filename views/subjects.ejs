@@ -1,0 +1,39 @@
+<% include partials/header %>
+    <h2>All Subjects Data</h2>
+    <a href="/subjects/add">Add Subject Data</a>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Subject Id</th>
+          <th>Teachers</th>
+          <th>Subject</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%for(let i = 0; i < Subject.length; i++) { %>
+          <tr>
+            <td><%= Subject[i].id %></td>
+            <td><%= Subject[i].Teachers.map(ob => ` ${ob.first_name} ${ob.last_name}`) %></td>
+            <td><%= Subject[i].subject_name %></td>
+            <td>
+              <a href="/subjects/edit/<%= Subject[i].id %>">Edit</a>
+              |
+              <a href="#" onclick="return confirmDel(<%= Subject[i].id %>) ">Delete</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <script>
+      let confirmDel = function(id){
+        let confim = confirm(`Apakah kamu akan menghapus Subject Id ${id}`)
+
+        if(confirm){
+          window.location.href = `/subjects/delete/${id}`
+        }
+      }
+    </script>
+  </body>
+</html>

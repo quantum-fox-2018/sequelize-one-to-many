@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>
+      Add Teacher
+    </title>
+    <style>
+      input[type=text]{
+        width: 150px;
+      }
+      .error{
+        padding: 5px;
+        background-color: red;
+      }
+    </style>
+  </head>
+    <h2>Add New Subjects</h2>
+    <h4>
+      <a href="/subjects">show all data</a>
+    </h4>
+    <form action="/subjects/add" method="POST">
+      <label for="subject_name">Subject Name :</label><br>
+      <input type="text" name="subject_name" /><br><br>
+      <input type="submit" value="Add Subject" />
+    </form>
+    </body>
+</html>

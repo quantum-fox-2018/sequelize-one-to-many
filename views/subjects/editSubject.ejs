@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>
+      Edit Teacher
+    </title>
+    <style>
+      input[type=text]{
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Edit Teachers Data</h2>
+    <h4>
+      <a href="/subjects">show all data</a>
+    </h4>
+    <form action="/subjects/edit/<%= subject.id  %>" method="POST">
+      <label for="subject_name" value>Subject Name :</label><br>
+      <input type="text" name="subject_name" value="<%= subject.subject_name %>" /><br><br>
+      <input type="submit" value="Add Subject" />
+    </form>
+  </body>
+
+</html>

@@ -1,0 +1,39 @@
+<% include partials/header %>
+    <h2>Students Data</h2>
+    <a href="/students/add">add student</a>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(let i = 0; i < Students.length; i++) {%>
+          <tr>
+            <td><%= Students[i].id %></td>
+            <td><%= Students[i].first_name %></td>
+            <td><%= Students[i].last_name %></td>
+            <td><%= Students[i].email %></td>
+            <td>
+              <a href="/students/edit/<%= Students[i].id %>">Edit</a>
+              |
+              <a href="#" onclick=" return confirmDel(<%= Students[i].id  %>)">Delete</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <script>
+        let confirmDel = function(id){
+          let confirmBox = confirm(`Apakah kamu yakin akan menghapus Data ${id}`)
+          if(confirmBox == true){
+              window.location.href = `/students/delete/${id}`;
+          }
+        }
+    </script>
+  </body>
+</html>
