@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <th>id</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Email</th>
+      <th>Subject</th>
+      <th>Options</th>
+    </tr>
+    <% teachers.forEach( teacher => {%>
+    <tr>
+      <td><%= teacher.id %></td>
+      <td><%= teacher.name_prefix+' '+teacher.first_name+' '+teacher.last_name%></td>
+      <td><%= teacher.gender %></td>
+      <td><%= teacher.email %></td>
+      <td><%= assignSubjects(teacher.Subject) %></td>
+      <td>
+        <a href="/teachers/edit/<%= teacher.id %>">Edit </a>|
+        <a href="/teachers/delete/<%= teacher.id %>" onclick="return confirm('Are you sure want to delete this data?');"> Delete</a>
+      </td>
+    </tr>
+    <% })%>
+  </table>
+</div>
